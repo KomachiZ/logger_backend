@@ -58,6 +58,11 @@ def validate_user(username):
         app.config['valid_users'] = config.get('valid_users', [])
         return username in app.config['valid_users']
 
+#nginx探活
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"status": "ok", "message": "Server is running"}), 200
+
 @app.route('/validate_user', methods=['POST'])
 def validate_user_handler():
     """
